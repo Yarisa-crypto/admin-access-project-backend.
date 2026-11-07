@@ -22,10 +22,11 @@ const authenticateToken = (req, res, next) => {
 };
 
 const checkRole = (roles) => {
+    const rolesArray = Array.isArray(roles) ? roles : [roles];
     return (req, res, next) => {
         const {rol_id} = req.user;
 
-        if (!roles.includes(rol_id)) {
+        if (!rolesArray.includes(rol_id)) {
             return res.status(403).json({ message: 'Acceso denegado, no tienes permiso para realizar esta acción.' });
         }
         next();

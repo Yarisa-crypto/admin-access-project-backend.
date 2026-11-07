@@ -46,7 +46,7 @@ exports.getAllProjects = async () => {
     }
 };
 
-exports.getProjectsById = async (userId) => {
+exports.getProjectsByUserId = async (userId) => {
         try {
         const participaciones = await UserProject.findAll({
             where: { usuario_id: userId },

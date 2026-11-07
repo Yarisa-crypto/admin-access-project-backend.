@@ -11,7 +11,7 @@ const sinPassword = (user) => {
 exports.createUser = async (req, res) => {
     try {
         const { nombre, email, password, rol_id, administrador_id } = req.body;
-        const newUser = await userService.createUser({ nombre, email, password, rol_id, administrador_id });
+        const newUser = await userService.createUser(nombre, email, password, rol_id, administrador_id);
         res.status(201).json({ message: 'Usuario creado exitosamente', user: sinPassword(newUser) });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -23,7 +23,7 @@ exports.updateUser = async (req, res) => {
     const { nombre, email, rol_id, administrador_id } = req.body;
     const admin_from_token = req.user.id; // Obtener el ID del administrador desde el token
     try{
-        const user = await userService.updateUser({ id, nombre, email, rol_id, administrador_id, admin_from_token });
+        const user = await userService.updateUser(id, nombre, email, rol_id, administrador_id, admin_from_token);
         res.status(200).json({ message: 'Usuario actualizado exitosamente', user: sinPassword(user) });
     } catch (error) {
         res.status(500).json({ message: error.message });
